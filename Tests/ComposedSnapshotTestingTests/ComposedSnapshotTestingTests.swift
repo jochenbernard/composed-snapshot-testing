@@ -30,7 +30,12 @@ struct ComposedSnapshotTestingTests {
     func testComposedSnapshot() async {
         await assertAsyncSnapshot(
             of: TestView(),
-            as: .image(on: [.iPhoneSe, .iPadPro12_9])
+            as: .image(
+                on: [
+                    ("iPhone SE", .iPhoneSe),
+                    ("iPad Pro 12.9\"", .iPadPro12_9)
+                ]
+            )
         )
     }
 
