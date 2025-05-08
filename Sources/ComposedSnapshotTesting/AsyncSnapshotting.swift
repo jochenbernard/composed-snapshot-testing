@@ -5,6 +5,7 @@ import AsyncSnapshotTesting
 public extension AsyncSnapshotting where Value: View, Format == UIImage {
     static func image(
         on configs: [(String, ViewImageConfig)],
+        layout: ComposedSnapshotLayout = .horizontal(alignment: .top),
         drawHierarchyInKeyWindow: Bool = false,
         precision: Float = 1,
         perceptualPrecision: Float = 1,
@@ -54,7 +55,8 @@ public extension AsyncSnapshotting where Value: View, Format == UIImage {
 
             return await snapshotting.snapshot(
                 ComposedSnapshotView(
-                    snapshots: snapshots
+                    snapshots: snapshots,
+                    layout: layout
                 )
             )
             .run()

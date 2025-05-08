@@ -2,14 +2,14 @@ import SwiftUI
 import Testing
 import SnapshotTesting
 import AsyncSnapshotTesting
-@testable import ComposedSnapshotTesting
+import ComposedSnapshotTesting
 
 @MainActor
 @Suite(.snapshots(record: .failed))
 struct ComposedSnapshotTestingTests {
     @Test
     @available(iOS 15.0, *)
-    func testPhoneSnapshot() {
+    static func testPhoneSnapshot() {
         assertSnapshot(
             of: TestView(),
             as: .image(on: .iPhoneSe)
@@ -18,26 +18,37 @@ struct ComposedSnapshotTestingTests {
 
     @Test
     @available(iOS 15.0, *)
-    func testPadSnapshot() {
+    static func testPadSnapshot() {
         assertSnapshot(
             of: TestView(),
             as: .image(on: .iPadPro12_9)
         )
     }
 
-    @Test
+    @Test(arguments: layouts)
     @available(iOS 15.0, *)
-    func testComposedSnapshot() async {
+    static func testComposedSnapshot(layout: ComposedSnapshotLayout) async {
         await assertAsyncSnapshot(
             of: TestView(),
             as: .image(
                 on: [
                     ("iPhone SE", .iPhoneSe),
                     ("iPad Pro 12.9\"", .iPadPro12_9)
-                ]
-            )
+                ],
+                layout: layout
+            ),
+            named: String(describing: layout)
         )
     }
+
+    static let layouts: [ComposedSnapshotLayout] = [
+        .horizontal(alignment: .top),
+        .horizontal(alignment: .center),
+        .horizontal(alignment: .bottom),
+        .vertical(alignment: .leading),
+        .vertical(alignment: .center),
+        .vertical(alignment: .trailing)
+    ]
 
     @available(iOS 15.0, *)
     struct TestView: View {
