@@ -1,25 +1,36 @@
 import SwiftUI
 import Testing
 import SnapshotTesting
+import AsyncSnapshotTesting
 @testable import ComposedSnapshotTesting
 
+@MainActor
 @Suite(.snapshots(record: .failed))
 struct ComposedSnapshotTestingTests {
-    @MainActor @Test
+    @Test
     @available(iOS 15.0, *)
-    func testSnapshotPhone() {
+    func testPhoneSnapshot() {
         assertSnapshot(
             of: TestView(),
             as: .image(on: .iPhoneSe)
         )
     }
 
-    @MainActor @Test
+    @Test
     @available(iOS 15.0, *)
-    func testSnapshotPad() {
+    func testPadSnapshot() {
         assertSnapshot(
             of: TestView(),
             as: .image(on: .iPadPro12_9)
+        )
+    }
+
+    @Test
+    @available(iOS 15.0, *)
+    func testComposedSnapshot() async {
+        await assertAsyncSnapshot(
+            of: TestView(),
+            as: .image(on: [.iPhoneSe, .iPadPro12_9])
         )
     }
 
