@@ -1,6 +1,14 @@
 {
-  "originHash" : "374423e004e2a8dc3398cff0e3d2212b6eb9fad630fd5ea13250502433776fbc",
   "pins" : [
+    {
+      "identity" : "async-snapshot-testing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jochenbernard/async-snapshot-testing",
+      "state" : {
+        "revision" : "8f6daf4efd1f228b217e0e7e9ee571196289c198",
+        "version" : "0.1.0"
+      }
+    },
     {
       "identity" : "swift-custom-dump",
       "kind" : "remoteSourceControl",
@@ -38,5 +46,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

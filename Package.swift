@@ -15,7 +15,10 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../async-snapshot-testing")
+        .package(
+            url: "https://github.com/jochenbernard/async-snapshot-testing",
+            from: "0.1.0"
+        )
     ],
     targets: [
         .target(
